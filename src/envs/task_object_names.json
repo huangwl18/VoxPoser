@@ -1,0 +1,11 @@
+{
+    "put_rubbish_in_bin": [["bin", "bin"], ["rubbish", "rubbish"], ["tomato1", "tomato1"], ["tomato2", "tomato2"]],
+    "lamp_off": [["lamp", "lamp_base"], ["button", "push_button_target"]],
+    "open_wine_bottle": [["bottle", "bottle"], ["cap", "cap"]],
+    "push_button": [["button", "push_button_target"]],
+    "take_off_weighing_scales": [["scale", "scales_tray_physical"], ["green pepper", "pepper0"], ["red pepper", "pepper1"], ["yellow pepper", "pepper2"]],
+    "meat_off_grill": [["grill", "grill"], ["meat", "chicken"]],
+    "slide_block_to_target": [["block", "block"], ["target", "target"]],
+    "take_lid_off_saucepan": [["saucepan", "saucepan"], ["saucepan_lid", "saucepan_lid"]],
+    "take_umbrella_out_of_umbrella_stand": [["umbrella", "umbrella"], ["stand", "stand"]]
+}

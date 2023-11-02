@@ -1,0 +1,115 @@
+import numpy as np
+from env_utils import execute
+from perception_utils import parse_query_obj
+import action_utils import composer
+
+objects = ['blue block', 'yellow block', 'mug']
+# Query: place the blue block on the yellow block, and avoid the mug at all time.
+composer("grasp the blue block while keeping at least 15cm away from the mug")
+composer("back to default pose")
+composer("move to 5cm on top of the yellow block while keeping at least 15cm away from the mug")
+composer("open gripper")
+# done
+
+objects = ['airpods', 'drawer']
+# Query: Open the drawer slowly.
+composer("grasp the drawer handle, at 0.5x speed")
+composer("move away from the drawer handle by 25cm, at 0.5x speed")
+composer("open gripper, at 0.5x speed")
+# done
+
+objects = ['tissue box', 'tissue', 'bowl']
+# Query: Can you pass me a tissue and place it next to the bowl?
+composer("grasp the tissue")
+composer("back to default pose")
+composer("move to 10cm to the right of the bowl")
+composer("open gripper")
+composer("back to default pose")
+# done
+
+objects = ['charger', 'outlet']
+# Query: unplug the charger from the wall.
+composer("grasp the charger")
+composer("back to default pose")
+# done
+
+objects = ['grape', 'lemon', 'drill', 'router', 'bread', 'tray']
+# Query: put the sweeter fruit in the tray that contains the bread.
+composer("grasp the grape")
+composer("back to default pose")
+composer("move to the top of the tray that contains the bread")
+composer("open gripper")
+# done
+
+objects = ['marbles', 'tray', 'broom']
+# Query: Can you sweep the marbles into the tray?
+composer("grasp the broom")
+composer("back to default pose")
+composer("push the marbles into the tray")
+# done
+
+objects = ['orange', 'QR code', 'lemon', 'drawer']
+# Query: put the sour fruit into the top drawer.
+composer("grasp the top drawer handle")
+composer("move away from the top drawer handle by 25cm")
+composer("open gripper")
+composer("back to default pose")
+composer("grasp the lemon")
+composer("move to 10cm on top of the top drawer")
+composer("open gripper")
+# done
+
+objects = ['fridge', 'hot soup']
+# Query: Open the fridge door and be careful around the hot soup.
+composer("grasp the fridge handle and keep at least 15cm away from the hot soup")
+composer("move away from the fridge handle by 25cm and keep at least 15cm away from the hot soup")
+composer("open gripper")
+# done
+
+objects = ['cyan bowl', 'yellow bowl', 'box', 'ice cream']
+# Query: move to the top of the cyan bowl.
+composer("move to the top of the cyan bowl")
+# done
+
+objects = ['drawer', 'umbrella']
+# Query: close the drawer.
+composer("push close the drawer handle by 25cm")
+# done
+
+objects = ['iPhone', 'airpods']
+# Query: slide the iPhone towards the airpods.
+composer("push the iPhone towards the airpods")
+# done
+
+objects = ['plate', 'steak', 'fork', 'knife', 'spoon']
+# Query: Could you please set up the fork for the steak for me?
+composer("grasp the fork")
+composer("back to default pose")
+composer("move to 10cm to the right of the plate")
+composer("open gripper")
+composer("back to default pose")
+# done
+
+objects = ['lamp', 'switch']
+# Query: Turn off the lamp.
+composer("close the gripper")
+composer("move to the center of the switch")
+composer("back to default pose")
+# done
+
+objects = ['beer']
+# Query: turn close the beer.
+composer("grasp the beer cap")
+composer("turn clockwise by 180 degrees")
+composer("back to default pose")
+# done
+
+objects = ['steak', 'grill', 'plate']
+# Query: Take the steak out of the grill and put it flat on the plate.
+composer("grasp the steak")
+composer("back to default pose")
+composer("rotate the gripper to be 45 degrees slanted relative to the plate")
+composer("move to 10cm on top of the plate")
+composer("open gripper")
+composer("back to default pose")
+# done
