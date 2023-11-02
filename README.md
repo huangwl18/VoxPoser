@@ -10,7 +10,7 @@
 
 This is the official demo code for [VoxPoser](https://voxposer.github.io/), a method that uses large language models and vision-language models to zero-shot synthesize trajectories for manipulation tasks.
 
-In this repo, we provide the implementation of VoxPoser in the [RLBench](https://sites.google.com/view/rlbench) environment for the diversity of tasks it offers. Note that VoxPoser is a zero-shot method that does not require any training data. Therefore, the main purpose of this repo is to provide a demo implementation rather than an evaluation benchmark.
+In this repo, we provide the implementation of VoxPoser in [RLBench](https://sites.google.com/view/rlbench) as its task diversity best resembles our real-world setup. Note that VoxPoser is a zero-shot method that does not require any training data. Therefore, the main purpose of this repo is to provide a demo implementation rather than an evaluation benchmark.
 
 If you find this work useful in your research, please cite using the following BibTeX:
 
@@ -22,7 +22,6 @@ If you find this work useful in your research, please cite using the following B
       year={2023}
     }
 ```
-
 
 ## Setup Instructions
 
@@ -46,3 +45,32 @@ pip install -r requirements.txt
 ## Running Demo
 
 Demo code is at `src/playground.ipynb`. Instructions can be found in the notebook.
+
+## Code Structure
+
+Core to VoxPoser:
+
+- **`playground.ipynb`**: Playground for VoxPoser.
+- **`LMP.py`**: Implementation of Language Model Programs (LMPs) that recursively generates code to decompose instructions and compose value maps for each sub-task.
+- **`interfaces.py`**: Interface that provides necessary APIs for language models (i.e., LMPs) to operate in voxel space and to invoke motion planner.
+- **`planners.py`**: Implementation of a greedy planner that plans a trajectory (represented as a series of waypoints) for an entity/movable given a value map.
+- **`controllers.py`**: Given a waypoint for an entity/movable, the controller applies (a series of) robot actions to achieve the waypoint.
+- **`dynamics_models.py`**: Environment dynamics model for the case where entity/movable is an object or object part. This is used in `controllers.py` to perform MPC.
+- **`prompts/rlbench`**: Prompts used by the different Language Model Programs (LMPs) in VoxPoser.
+
+Environment and utilities:
+
+- **`envs`**:
+  - **`rlbench_env.py`**: Wrapper of RLBench env to expose useful functions for VoxPoser.
+  - **`task_object_names.json`**: Mapping of object names exposed to VoxPoser and their corresponding scene object names for each individual task.
+- **`configs/rlbench_config.yaml`**: Config file for all the involved modules in RLBench environment.
+- **`arguments.py`**: Argument parser for the config file.
+- **`LLM_cache.py`**: Caching of language model outputs that writes to disk to save cost and time.
+- **`utils.py`**: Utility functions.
+- **`visualizers.py`**: A Plotly-based visualizer for value maps and planned trajectories.
+
+## Acknowledgments
+- Environment is based on [RLBench](https://sites.google.com/view/rlbench).
+- Implementation of Language Model Programs (LMPs) is based on [Code as Policies](https://code-as-policies.github.io/).
+- Some code snippets are from [Where2Act](https://cs.stanford.edu/~kaichun/where2act/).
+- Additional acknowledgement to GitHub Copilot and GPT-4 for collaboratively writing a significant portion of the code in this codebase.
