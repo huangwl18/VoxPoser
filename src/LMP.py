@@ -1,7 +1,6 @@
-
 import openai
 from time import sleep
-from openai.error import RateLimitError, APIConnectionError
+from openai import RateLimitError, APIConnectionError
 from pygments import highlight
 from pygments.lexers import PythonLexer
 from pygments.formatters import TerminalFormatter
@@ -76,7 +75,7 @@ class LMP:
                 print('(using cache)', end=' ')
                 return self._cache[kwargs]
             else:
-                ret = openai.ChatCompletion.create(**kwargs)['choices'][0]['message']['content']
+                ret = client.chat.completions.create(**kwargs).choices[0].message.content
                 # post processing
                 ret = ret.replace('```', '').replace('python', '').strip()
                 self._cache[kwargs] = ret
@@ -86,7 +85,7 @@ class LMP:
                 print('(using cache)', end=' ')
                 return self._cache[kwargs]
             else:
-                ret = openai.Completion.create(**kwargs)['choices'][0]['text'].strip()
+                ret = client.completions.create(**kwargs).choices[0].text.strip()
                 self._cache[kwargs] = ret
                 return ret
 
