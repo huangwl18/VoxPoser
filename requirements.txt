@@ -1,5 +1,5 @@
 jupyter
-openai
+openai==0.28
 plotly
 transforms3d
 open3d
