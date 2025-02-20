@@ -12,7 +12,7 @@ This is the official demo code for [VoxPoser](https://voxposer.github.io/), a me
 
 In this repo, we provide the implementation of VoxPoser in [RLBench](https://sites.google.com/view/rlbench) as its task diversity best resembles our real-world setup. Note that VoxPoser is a zero-shot method that does not require any training data. Therefore, the main purpose of this repo is to provide a demo implementation rather than an evaluation benchmark.
 
-**Note: This codebase currently does not contain the real-world perception pipeline described in the paper, which produces a real-time mapping from object names to object masks. Instead, it uses the object masks provided as part of RLBench's `get_observation` function. If you are interested in deploying the code on a real robot, you may find more information in the section [Real World Deployment](#real-world-deployment).**
+**Note: This codebase currently does not contain the perception pipeline used in our real-world experiments, which produces a real-time mapping from object names to object masks. Instead, it uses the object masks provided as part of RLBench's `get_observation` function. If you are interested in deploying the code on a real robot, you may find more information in the section [Real World Deployment](#real-world-deployment).**
 
 If you find this work useful in your research, please cite using the following BibTeX:
 
