@@ -12,6 +12,8 @@ This is the official demo code for [VoxPoser](https://voxposer.github.io/), a me
 
 In this repo, we provide the implementation of VoxPoser in [RLBench](https://sites.google.com/view/rlbench) as its task diversity best resembles our real-world setup. Note that VoxPoser is a zero-shot method that does not require any training data. Therefore, the main purpose of this repo is to provide a demo implementation rather than an evaluation benchmark.
 
+**Note: This codebase currently does not contain the real-world perception pipeline described in the paper, which produces a real-time mapping from object names to object masks. Instead, it uses the object masks provided as part of RLBench's `get_observation` function. If you are interested in deploying the code on a real robot, you may find more information in the section [Real World Deployment](#real-world-deployment).**
+
 If you find this work useful in your research, please cite using the following BibTeX:
 
 ```bibtex
@@ -69,8 +71,14 @@ Environment and utilities:
 - **`utils.py`**: Utility functions.
 - **`visualizers.py`**: A Plotly-based visualizer for value maps and planned trajectories.
 
+## Real-World Deployment
+To adapt the code to deploy on a real robot, most changes should only happen in the environment file (e.g., you can consider making a copy of `rlbench_env.py` and implementing the same APIs based on your perception and controller modules).
+
+Our perception pipeline consists of the following modules: [OWL-ViT](https://huggingface.co/docs/transformers/en/model_doc/owlvit) for open-vocabulary detection in the first frame, [SAM](https://github.com/facebookresearch/segment-anything?tab=readme-ov-file#segment-anything) for converting the produced bounding boxes to masks in the first frame, and [XMEM](https://github.com/hkchengrex/XMem) for tracking the masks over time for the subsequent frames. Now you may consider simplifying the pipeline using only an open-vocabulary detector and [SAM 2](https://github.com/facebookresearch/segment-anything?tab=readme-ov-file#latest-updates----sam-2-segment-anything-in-images-and-videos) for segmentation and tracking. Our controller is based on the OSC implementation from [Deoxys](https://github.com/UT-Austin-RPL/deoxys_control). More details can be found in the [paper](https://voxposer.github.io/voxposer.pdf).
+
+To avoid compounded latency introduced by different modules (especially the perception pipeline), you may also consider running a concurrent process that only performs tracking.
+
 ## Acknowledgments
 - Environment is based on [RLBench](https://sites.google.com/view/rlbench).
 - Implementation of Language Model Programs (LMPs) is based on [Code as Policies](https://code-as-policies.github.io/).
 - Some code snippets are from [Where2Act](https://cs.stanford.edu/~kaichun/where2act/).
-- Additional acknowledgement to GitHub Copilot and GPT-4 for collaboratively writing a significant portion of the code in this codebase.
